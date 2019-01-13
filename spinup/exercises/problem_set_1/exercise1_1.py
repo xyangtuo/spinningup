@@ -29,7 +29,7 @@ def gaussian_likelihood(x, mu, log_std):
     #                     #
     #######################
     log_prob = -log_std - 0.5*np.log(2*Pi) - (x-mu)**2/(2*(log_std)**2)
-    return tf.constant(0)
+    return tf.reduce_sum(log_prob)
 
 
 if __name__ == '__main__':
