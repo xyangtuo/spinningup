@@ -71,6 +71,7 @@ def train(env_name='CartPole-v0', hidden_sizes=[32], lr=1e-2,
 
             # act in the environment
             act = sess.run(actions, {obs_ph: obs.reshape(1,-1)})[0]
+            print(act)
             obs, rew, done, _ = env.step(act)
 
             # save action, reward
