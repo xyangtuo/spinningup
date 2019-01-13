@@ -38,7 +38,10 @@ def mlp(x, hidden_sizes=(32,), activation=tf.tanh, output_activation=None):
     #   YOUR CODE HERE    #
     #                     #
     #######################
-    pass
+    for size in hidden_sizes[:-1]:
+        x = tf.layers.dense(size, activation=activation)(x)
+    x = tf.layers.dense(hidden_sizes[-1], activation=output_activation)
+    return x
 
 def mlp_gaussian_policy(x, a, hidden_sizes, activation, output_activation, action_space):
     """
@@ -80,7 +83,10 @@ def mlp_gaussian_policy(x, a, hidden_sizes, activation, output_activation, actio
     # mu = 
     # log_std = 
     # pi = 
-
+    logits = mlp(x, hidden_sizes+[action_space], activation, output_activation)  #action vector,[batch,action_space]
+    mu = tf.reduce_mean(x,axis=1)
+    log_std = tf.Variable(tf.ones(logits.shape)*(-0.5),validate_shape=False)
+    pi = gaussian_likelihood(logits,mu,log_std)                                  #
     logp = exercise1_1.gaussian_likelihood(a, mu, log_std)
     logp_pi = exercise1_1.gaussian_likelihood(pi, mu, log_std)
     return pi, logp, logp_pi
