@@ -36,8 +36,8 @@ if __name__ == '__main__':
     """
     Run this file to verify your solution.
     """
-    from content.spinningup.spinup.exercises.problem_set_1_solutions import exercise1_1_soln
-    from content.spinningup.spinup.exercises.common import print_result
+    from spinup.exercises.problem_set_1_solutions import exercise1_1_soln
+    from spinup.exercises.common import print_result
 
     sess = tf.Session()
 
